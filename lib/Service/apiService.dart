@@ -1,6 +1,7 @@
-import '../Model/ApiModel.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import '../Model/ApiModel.dart';
 
 class ApiService with ChangeNotifier {
   static String _url = 'aviled.com.tr';

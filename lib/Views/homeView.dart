@@ -1,8 +1,12 @@
 import 'dart:async';
 
+import '../Model/SQLModel.dart';
+import '../Service/DatabaseService.dart';
+import 'Settings/savedItemsView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:light/light.dart';
+import 'package:oscilloscope/oscilloscope.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../Extension/customViews.dart';
@@ -14,12 +18,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Light _light;
-  String _luxString = '?';
+  String _luxString = 'unknown';
+  String locationName = '';
   StreamSubscription _subscription;
+
+  DatabaseHelper databaseHelper = DatabaseHelper();
+  DateTime now = DateTime.now();
+  List<double> traceX = [];
 
   void onData(int luxValue) async {
     setState(() {
       _luxString = "$luxValue";
+      traceX.add(luxValue.toDouble());
     });
   }
 
@@ -28,12 +38,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   void startListening() {
-    _light = Light();
+    _light = new Light();
     try {
       _subscription = _light.lightSensorStream.listen(onData);
-    } on LightException catch (exception) {
-      print(exception);
-    }
+    } on LightException catch (_) {}
   }
 
   @override
@@ -54,7 +62,19 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double nivel = double.tryParse('$_luxString') ?? 123;
+    Oscilloscope scopeTwo = Oscilloscope(
+      showYAxis: true,
+      margin: EdgeInsets.all(10.0),
+      strokeWidth: 1.0,
+      backgroundColor: Colors.black,
+      traceColor: Colors.white,
+      yAxisMax: 1.0,
+      yAxisMin: -1.0,
+      dataSet: traceX,
+    );
+
+    double nivel = double.tryParse('$_luxString') ?? 0.0;
+    DateTime date = new DateTime(now.day, now.month, now.year);
     return Scaffold(
       appBar: CustomAppBar(),
       body: Padding(
@@ -83,16 +103,70 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Text(
-                "Lux Değeri : ($_luxString)",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    "Lüx Değeri : ($_luxString)",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      showDialog<void>(
+                        context: context,
+                        barrierDismissible: false, // user must tap button!
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Kayıt Yerini Seçiniz'),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: <Widget>[
+                                  TextField(
+                                    autofocus: true,
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Yer İsmini Giriniz',
+                                    ),
+                                    onChanged: (value) {
+                                      locationName = value;
+                                    },
+                                  )
+                                ],
+                              ),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('Tamam'),
+                              ),
+                            ],
+                          );
+                        },
+                      ).then((value) {
+                        if (locationName != '') {
+                          databaseHelper
+                              .insertData(DataModel(DateTime.now().millisecondsSinceEpoch.remainder(100000), locationName, _luxString, "$date"))
+                              .then((value) => showSnackBarVoid(context, 'Kaydedildi', Icons.thumb_up));
+                        }
+                      });
+                    },
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          child: Icon(Icons.save),
+                        ),
+                        Text('Kaydet'),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-            TextButton(
-              onPressed: () => print('object'),
-              child: Text('Kaydet'),
-            )
+            Expanded(flex: 1, child: scopeTwo),
           ],
         ),
       ),

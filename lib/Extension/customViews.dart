@@ -18,7 +18,10 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
           automaticallyImplyLeading: true,
           iconTheme: IconThemeData(color: notify.darkTheme ? Colors.white : Colors.black),
           actions: [],
-          title: Text(title ?? ''),
+          title: Text(
+            title ?? '',
+            style: TextStyle(color: notify.darkTheme ? Colors.white : Colors.black, fontSize: 23),
+          ),
         );
       },
     );

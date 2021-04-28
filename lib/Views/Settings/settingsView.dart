@@ -1,6 +1,7 @@
-import 'package:aviled_light_sensor/Core/Theme.dart';
-import 'package:aviled_light_sensor/Views/Settings/AboutUsView.dart';
-import 'package:aviled_light_sensor/Views/Settings/savedItemsView.dart';
+import '../../Core/Theme.dart';
+import '../../Extension/customViews.dart';
+import 'AboutUsView.dart';
+import 'savedItemsView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,15 +15,14 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        title: 'Ayarlar',
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Ayarlar',
-              style: TextStyle(fontSize: 45, fontWeight: FontWeight.w400),
-            ),
             SizedBox(
               height: 50,
             ),

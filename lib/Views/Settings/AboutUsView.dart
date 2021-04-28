@@ -1,5 +1,5 @@
-import 'package:aviled_light_sensor/Core/Theme.dart';
-import 'package:aviled_light_sensor/Service/about_us_service.dart';
+import '../../Core/Theme.dart';
+import '../../Service/about_us_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';

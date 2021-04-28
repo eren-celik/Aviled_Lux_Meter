@@ -1,7 +1,8 @@
-import '../Model/AboutUsModel.dart';
-import 'apiService.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobx/mobx.dart';
+
+import '../Model/AboutUsModel.dart';
+import 'apiService.dart';
 
 part 'about_us_service.g.dart';
 
