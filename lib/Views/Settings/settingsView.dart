@@ -135,7 +135,7 @@ class _SettingsState extends State<Settings> {
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                     textAlign: TextAlign.start,
                   ),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.28),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.2),
                   Container(
                     width: 40,
                     height: 40,
