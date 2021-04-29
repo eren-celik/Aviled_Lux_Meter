@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                 CircularPercentIndicator(
                   radius: 250.0,
                   lineWidth: 10.0,
-                  percent: (nivel <= 2000) ? nivel / 2000 : 0.0,
+                  percent: (nivel <= 4000) ? nivel / 4000 : 0.0,
                   center: Center(
                     child: Text(
                       "$_luxString",

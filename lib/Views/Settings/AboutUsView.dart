@@ -1,14 +1,14 @@
-import '../../Core/Theme.dart';
-import '../../Service/about_us_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:package_info/package_info.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../Core/Theme.dart';
+import '../../Service/about_us_service.dart';
 import '../../app_localization.dart';
 
 class AboutUsView extends StatefulWidget {

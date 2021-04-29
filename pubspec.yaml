@@ -1,5 +1,5 @@
 name: aviled_light_sensor
-description: A new Flutter project.
+description: Lux Measurement Application
 publish_to: "none"
 
 version: 1.0.0+2

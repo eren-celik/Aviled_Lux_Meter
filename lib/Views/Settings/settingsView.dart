@@ -1,13 +1,13 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:in_app_review/in_app_review.dart';
+import 'package:provider/provider.dart';
 
 import '../../Core/Theme.dart';
 import '../../Extension/customViews.dart';
 import '../../app_localization.dart';
 import 'AboutUsView.dart';
 import 'savedItemsView.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class Settings extends StatefulWidget {
   @override
