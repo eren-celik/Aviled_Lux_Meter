@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../Extension/customViews.dart';
 import '../../Model/SQLModel.dart';
 import '../../Service/DatabaseService.dart';
+import '../../app_localization.dart';
 
 class SavedItems extends StatefulWidget {
   @override
@@ -17,14 +18,14 @@ class _SavedItemsState extends State<SavedItems> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Kaydedilenler',
+        title: AppLocalizations.of(context).translate('kaydedilenler'),
       ),
       body: Center(
         child: FutureBuilder(
           future: databaseHelper.getData(),
           builder: (context, AsyncSnapshot<List<DataModel>> snapshot) {
             if (!snapshot.hasData) return CupertinoActivityIndicator();
-            if (snapshot.data.isEmpty) return Text('Veri Bulunamadı');
+            if (snapshot.data.isEmpty) return Text(AppLocalizations.of(context).translate('veriyok'));
             return ListView.separated(
               separatorBuilder: (context, index) => Divider(),
               physics: BouncingScrollPhysics(),
@@ -54,15 +55,16 @@ class _SavedItemsState extends State<SavedItems> {
                     ),
                   ),
                   onDismissed: (direction) => databaseHelper.removeData(data.id).then((value) {
+                    showSnackBarVoid(context, AppLocalizations.of(context).translate('silindi'), CupertinoIcons.hand_thumbsup);
                     setState(() {
                       snapshot.data.remove(index);
                     });
-                    showSnackBarVoid(context, 'Başarıyla Silindi', CupertinoIcons.hand_thumbsup);
                   }),
                   child: ListTile(
                     title: Text(data.name),
-                    subtitle: Text('Tarih: ${date.day}-${date.month}-${date.year} / ${date.hour}: ${date.minute}'),
-                    trailing: Text('Lüx: ${data.luxValue}'),
+                    subtitle: Text(
+                        '${AppLocalizations.of(context).translate('tarih')}: ${date.day}-${date.month}-${date.year} / ${date.hour}: ${date.minute}'),
+                    trailing: Text('${AppLocalizations.of(context).translate('lux')}: ${data.luxValue}'),
                   ),
                 );
               },

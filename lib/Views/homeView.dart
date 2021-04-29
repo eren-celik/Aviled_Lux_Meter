@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import '../app_localization.dart';
+
 import '../Model/SQLModel.dart';
 import '../Service/DatabaseService.dart';
 import 'Settings/savedItemsView.dart';
@@ -108,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    "Lüx Değeri : ($_luxString)",
+                    "${AppLocalizations.of(context).translate('lüxdegeri')} : ($_luxString)",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
                   ),
                   ElevatedButton(
@@ -118,7 +120,9 @@ class _HomePageState extends State<HomePage> {
                         barrierDismissible: false, // user must tap button!
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text('Kayıt Yerini Seçiniz'),
+                            title: Text(
+                              AppLocalizations.of(context).translate('selectplace'),
+                            ),
                             content: SingleChildScrollView(
                               child: ListBody(
                                 children: <Widget>[
@@ -126,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                                     autofocus: true,
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(),
-                                      labelText: 'Yer İsmini Giriniz',
+                                      labelText: AppLocalizations.of(context).translate('entervalue'),
                                     ),
                                     onChanged: (value) {
                                       locationName = value;
@@ -140,7 +144,9 @@ class _HomePageState extends State<HomePage> {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('Tamam'),
+                                child: Text(
+                                  AppLocalizations.of(context).translate('tamam'),
+                                ),
                               ),
                             ],
                           );
@@ -149,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                         if (locationName != '') {
                           databaseHelper
                               .insertData(DataModel(DateTime.now().millisecondsSinceEpoch.remainder(100000), locationName, _luxString, "$date"))
-                              .then((value) => showSnackBarVoid(context, 'Kaydedildi', Icons.thumb_up));
+                              .then((value) => showSnackBarVoid(context, AppLocalizations.of(context).translate('kaydedildi'), Icons.thumb_up));
                         }
                       });
                     },
@@ -159,7 +165,9 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.only(right: 10.0),
                           child: Icon(Icons.save),
                         ),
-                        Text('Kaydet'),
+                        Text(
+                          AppLocalizations.of(context).translate('kaydet'),
+                        ),
                       ],
                     ),
                   ),

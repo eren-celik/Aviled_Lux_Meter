@@ -1,11 +1,10 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 import '../Core/Theme.dart';
-import '../Service/about_us_service.dart';
 import '../Service/apiService.dart';
+import '../app_localization.dart';
 import 'Settings/settingsView.dart';
 import 'homeView.dart';
 
@@ -16,9 +15,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<AboutUsService>(
-          create: (context) => AboutUsService(),
-        ),
         ChangeNotifierProvider(
           create: (_) => ThemeNotifier(),
         ),
@@ -28,7 +24,26 @@ class MyApp extends StatelessWidget {
         child: Consumer<ThemeNotifier>(
           builder: (context, ThemeNotifier notifier, child) {
             return MaterialApp(
-              title: '',
+              onGenerateTitle: (context) => AppLocalizations.of(context).translate('title'),
+              debugShowCheckedModeBanner: false,
+              supportedLocales: [
+                Locale('en', 'US'),
+                Locale('tr', 'TR'),
+              ],
+              localizationsDelegates: [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              localeResolutionCallback: (locale, supportedLocales) {
+                for (var supportedLocale in supportedLocales) {
+                  if (supportedLocale.languageCode == locale.languageCode && supportedLocale.countryCode == locale.countryCode) {
+                    return supportedLocale;
+                  }
+                }
+                return supportedLocales.first;
+              },
               theme: notifier.darkTheme ? dark : light,
               home: HomeNavigation(),
             );
@@ -68,13 +83,13 @@ class _HomeNavigationState extends State<HomeNavigation> {
         BottomNavigationBarItem(
           icon: Icon(CupertinoIcons.house),
           activeIcon: Icon(CupertinoIcons.house_fill),
-          label: 'Ana Sayfa',
+          label: AppLocalizations.of(context).translate('anasayfa'),
           backgroundColor: Colors.white,
         ),
         BottomNavigationBarItem(
           icon: Icon(CupertinoIcons.gear),
           activeIcon: Icon(CupertinoIcons.gear_alt_fill),
-          label: 'Ayarlar',
+          label: AppLocalizations.of(context).translate('ayarlar'),
           backgroundColor: Colors.white,
         ),
       ],

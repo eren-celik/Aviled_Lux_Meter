@@ -9,6 +9,8 @@ import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 
+import '../../app_localization.dart';
+
 class AboutUsView extends StatefulWidget {
   @override
   _AboutUsViewState createState() => _AboutUsViewState();
@@ -57,7 +59,7 @@ class _AboutUsViewState extends State<AboutUsView> {
             automaticallyImplyLeading: true,
             iconTheme: IconThemeData(color: notify.darkTheme ? Colors.white : Colors.black),
             title: Text(
-              'Hakkımızda',
+              AppLocalizations.of(context).translate('hakkimizda'),
               style: TextStyle(color: notify.darkTheme ? Colors.white : Colors.black),
             ),
             actions: [
@@ -85,10 +87,10 @@ class _AboutUsViewState extends State<AboutUsView> {
                   return AboutUsBody(aboutUsService: aboutUsService, version: version);
                   break;
                 case AboutUsState.ERROR:
-                  return Text('Hata Meydana Geldi');
+                  return Text(AppLocalizations.of(context).translate('hata'));
                   break;
               }
-              return Text('Veri Bulunamadı');
+              return Text(AppLocalizations.of(context).translate('veriyok'));
             }),
           ),
         );
@@ -139,12 +141,12 @@ class AboutUsBody extends StatelessWidget {
                             context: context,
                             builder: (BuildContext context) {
                               return CupertinoActionSheet(
-                                title: const Text('Ara'),
+                                title: Text(AppLocalizations.of(context).translate('ara')),
                                 actions: <Widget>[
                                   CupertinoActionSheetAction(
                                     onPressed: () {
                                       launch('tel://${data.phone}');
-                                      Navigator.pop(context, 'One');
+                                      Navigator.pop(context);
                                     },
                                     child: Text(data.phone),
                                   ),
@@ -152,9 +154,9 @@ class AboutUsBody extends StatelessWidget {
                                 cancelButton: CupertinoActionSheetAction(
                                   isDefaultAction: true,
                                   onPressed: () {
-                                    Navigator.pop(context, 'Cancel');
+                                    Navigator.pop(context);
                                   },
-                                  child: const Text('Geri'),
+                                  child: Text(AppLocalizations.of(context).translate('geri')),
                                 ),
                               );
                             },

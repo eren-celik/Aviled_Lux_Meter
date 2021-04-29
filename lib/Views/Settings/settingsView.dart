@@ -1,5 +1,6 @@
 import '../../Core/Theme.dart';
 import '../../Extension/customViews.dart';
+import '../../app_localization.dart';
 import 'AboutUsView.dart';
 import 'savedItemsView.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +17,7 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Ayarlar',
+        title: AppLocalizations.of(context).translate('ayarlar'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -46,10 +47,11 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   Text(
-                    'Hakkımızda  ',
+                    AppLocalizations.of(context).translate('hakkimizda'),
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                    textAlign: TextAlign.start,
                   ),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.3),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.35),
                   Container(
                     width: 40,
                     height: 40,
@@ -86,10 +88,11 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   Text(
-                    'Kaydedilenler',
+                    AppLocalizations.of(context).translate('kaydedilenler'),
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                    textAlign: TextAlign.start,
                   ),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.3),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.4),
                   Container(
                     width: 40,
                     height: 40,
@@ -119,8 +122,9 @@ class _SettingsState extends State<Settings> {
                   ),
                 ),
                 Text(
-                  'Karanlık Mod',
+                  AppLocalizations.of(context).translate('karanlıkmod'),
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                  textAlign: TextAlign.start,
                 ),
                 SizedBox(width: MediaQuery.of(context).size.width * 0.3),
                 Consumer<ThemeNotifier>(

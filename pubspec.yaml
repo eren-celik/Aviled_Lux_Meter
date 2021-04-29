@@ -1,7 +1,6 @@
 name: aviled_light_sensor
 description: A new Flutter project.
-
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: "none" 
 
 version: 1.0.0+2
 
@@ -18,7 +17,6 @@ dependencies:
   in_app_review: ^2.0.2
   light: ^2.0.0
   map_launcher: ^2.0.0
-  mp_chart: ^0.3.1
   oscilloscope: ^0.1.0
   package_info: ^2.0.0
   path: ^1.8.0
@@ -27,6 +25,9 @@ dependencies:
   shared_preferences: ^2.0.5
   sqflite: ^2.0.0+3
   url_launcher: ^6.0.3
+
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -37,7 +38,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - lang/en.json
+    - lang/tr.json
