@@ -1,3 +1,5 @@
+import 'package:in_app_review/in_app_review.dart';
+
 import '../../Core/Theme.dart';
 import '../../Extension/customViews.dart';
 import '../../app_localization.dart';
@@ -13,6 +15,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  final InAppReview inAppReview = InAppReview.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,6 +96,46 @@ class _SettingsState extends State<Settings> {
                     textAlign: TextAlign.start,
                   ),
                   SizedBox(width: MediaQuery.of(context).size.width * 0.4),
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade400,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(
+                      CupertinoIcons.right_chevron,
+                      size: 20,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(height: 40),
+            GestureDetector(
+              onTap: () async {
+                if (await inAppReview.isAvailable()) {
+                  inAppReview.requestReview();
+                }
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.green.shade200,
+                    child: Icon(
+                      CupertinoIcons.gift_fill,
+                      color: Colors.green,
+                      size: 20,
+                    ),
+                  ),
+                  Text(
+                    AppLocalizations.of(context).translate('oyla'),
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                    textAlign: TextAlign.start,
+                  ),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.28),
                   Container(
                     width: 40,
                     height: 40,

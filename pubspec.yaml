@@ -1,6 +1,6 @@
 name: aviled_light_sensor
 description: A new Flutter project.
-publish_to: "none" 
+publish_to: "none"
 
 version: 1.0.0+2
 
@@ -9,6 +9,8 @@ environment:
 
 dependencies:
   flutter:
+    sdk: flutter
+  flutter_localizations:
     sdk: flutter
   cupertino_icons: ^1.0.2
   flutter_html: ^2.0.0-nullsafety.0
@@ -25,9 +27,6 @@ dependencies:
   shared_preferences: ^2.0.5
   sqflite: ^2.0.0+3
   url_launcher: ^6.0.3
-
-  flutter_localizations:
-    sdk: flutter
 
 dev_dependencies:
   flutter_test:

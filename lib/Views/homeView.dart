@@ -67,10 +67,10 @@ class _HomePageState extends State<HomePage> {
     Oscilloscope scopeTwo = Oscilloscope(
       showYAxis: true,
       margin: EdgeInsets.all(10.0),
-      strokeWidth: 1.0,
+      strokeWidth: 3.0,
       backgroundColor: Colors.black,
       traceColor: Colors.white,
-      yAxisMax: 1.0,
+      yAxisMax: 2.0,
       yAxisMin: -1.0,
       dataSet: traceX,
     );
@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                 CircularPercentIndicator(
                   radius: 250.0,
                   lineWidth: 10.0,
-                  percent: (nivel <= 999) ? nivel / 1000 : 0.0,
+                  percent: (nivel <= 2000) ? nivel / 2000 : 0.0,
                   center: Center(
                     child: Text(
                       "$_luxString",
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   circularStrokeCap: CircularStrokeCap.round,
-                  progressColor: Colors.yellowAccent,
+                  progressColor: Colors.green,
                 ),
               ],
             ),
@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       showDialog<void>(
                         context: context,
-                        barrierDismissible: false, // user must tap button!
+                        barrierDismissible: false,
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text(
